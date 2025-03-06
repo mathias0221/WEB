@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENRUTADOR</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fontawesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <!-- COCO-SSD model -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+</head>
+<body>
+    <!-- Pantalla principal -->
+    <div id="main-screen" class="screen active">
+        <h1>ENRUTADOR</h1>
+        <div class="main-buttons">
+            <button id="folders-btn" class="main-btn"><i class="fas fa-folder"></i> CARPETAS</button>
+            <button id="scan-btn" class="main-btn"><i class="fas fa-camera"></i> LECTURA DE CÓDIGOS</button>
+        </div>
+    </div>
+
+    <!-- Pantalla de carpetas -->
+    <div id="folders-screen" class="screen">
+        <div class="header">
+            <button id="back-to-main" class="back-btn"><i class="fas fa-arrow-left"></i></button>
+            <h2>Carpetas</h2>
+        </div>
+        <div class="action-buttons">
+            <button id="add-folder-btn"><i class="fas fa-plus"></i> Agregar Carpeta</button>
+            <button id="delete-folder-btn"><i class="fas fa-trash"></i> Eliminar Carpeta</button>
+        </div>
+        <ul id="folders-list" class="folders-list"></ul>
+    </div>
+
+    <!-- Pantalla de códigos de una carpeta -->
+    <div id="codes-screen" class="screen">
+        <div class="header">
+            <button id="back-to-folders" class="back-btn"><i class="fas fa-arrow-left"></i></button>
+            <h2 id="current-folder-name">Códigos</h2>
+        </div>
+        <div class="action-buttons">
+            <button id="add-code-btn"><i class="fas fa-plus"></i> Agregar Código</button>
+            <button id="delete-code-btn"><i class="fas fa-trash"></i> Eliminar Código</button>
+        </div>
+        <div class="codes-header">
+            <span>Códigos</span>
+            <span>Ruta</span>
+        </div>
+        <ul id="codes-list" class="codes-list"></ul>
+    </div>
+
+    <!-- Pantalla de escaneo -->
+    <div id="scan-screen" class="screen">
+        <div class="header">
+            <button id="back-to-main-from-scan" class="back-btn"><i class="fas fa-arrow-left"></i></button>
+            <h2>Lectura de Códigos</h2>
+        </div>
+        <div class="camera-container">
+            <video id="video" autoplay playsinline></video>
+            <canvas id="canvas"></canvas>
+        </div>
+        <div id="scanner-status" class="scanner-status">Inicializando cámara...</div>
+        <div id="detected-codes" class="detected-codes"></div>
+    </div>
+
+    <!-- Modal para agregar carpeta -->
+    <div id="add-folder-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Agregar Nueva Carpeta</h3>
+            <input type="text" id="folder-name-input" placeholder="Nombre de la carpeta">
+            <button id="confirm-add-folder">Agregar</button>
+        </div>
+    </div>
+
+    <!-- Modal para agregar código -->
+    <div id="add-code-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Agregar Nuevo Código</h3>
+            <input type="text" id="code-input" placeholder="Código">
+            <input type="text" id="route-input" placeholder="Ruta (letra)">
+            <button id="confirm-add-code">Agregar</button>
+        </div>
+    </div>
+
+    <!-- Modal para eliminar carpeta -->
+    <div id="delete-folder-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Eliminar Carpeta</h3>
+            <div id="delete-folders-list"></div>
+            <button id="confirm-delete-folder">Eliminar Seleccionadas</button>
+        </div>
+    </div>
+
+    <!-- Modal para eliminar código -->
+    <div id="delete-code-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Eliminar Código</h3>
+            <div id="delete-codes-list"></div>
+            <button id="confirm-delete-code">Eliminar Seleccionados</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
